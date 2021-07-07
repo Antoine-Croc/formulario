@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="js/csv_to_json.js"></script>
+    <script type="text/javascript" src="js/xlsx_to_json.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript" src="js/makecsv.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="all" type="text/css">
+    <link rel="stylesheet" href="css/formulario.css" media="all" type="text/css">
+</head>
+
+<body>
+    <form name="formulario" id="form_id">
+        <div class="container-fluid w-50 bg-secondary bg-gradient">
+            <legend class="Title">--Titulo--</legend>
+            <div>
+                <legend>Información cliente:</legend>
+                <div class="row">
+                    <div class="region col-sm">
+                        <label class="region-fill">
+                        Escribir la región:
+                    </label>
+                        <div class="datalist-holder">
+                            <input autocomplete="off" list="region_elec" name="region_elec" class="form-control" id="region_client" onclick="populateList(regionL,'region_elec')" />
+                            <datalist id="region_elec">
+                    </datalist>
+                        </div>
+                    </div>
+                    <div class="contador col-sm">
+                        <label class="counter-type-select" for="counter-type-select">
+                        Tipo de contador:
+                    </label>
+                        <select id="counter-type" class="form-select" for="counter-type-select" name="counter-type" id="counter-type-select" onclick="populateList(contadorL,'counter-type')">
+                        <option value="null">--Elije a una opción--</option>
+                    </select>
+                    </div>
+                    <div class="rate col-sm">
+                        <label class="rate-type-select" for="rate-type-select">
+                        Tarifa antiguo:
+                    </label>
+                        <select id="rate-type" class="form-select" for="rate-type-select" name="rate-type" id="rate-type-select">
+                        <option value="null">--Elije a una opción--</option>
+                        <option value="6.1A">tarifa 6.1A</option>
+                        <option value="3.0">tarifa 3.0</option>
+                        <option value="3.1A">tarifa 3.1A</option>   
+                    </select>
+                    </div>
+                </div>
+                <div class="Potency_fill form-group">
+                    <legend> Potencia: </legend>
+                    <fieldset id="potency_input" class="row">
+                        <input class="form-control col mx-2" autocomplete="off" type="number" step="0.01" min="0" id="Value_1" name="Value 1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="8"
+                        />
+                        <input class="form-control col mx-2" autocomplete="off" type="number" step="0.01" min="0" id="Value_2" name="Value 2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="8"
+                        />
+                        <input class="form-control col mx-2" autocomplete="off" type="number" step="0.01" min="0" id="Value_3" name="Value 3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="8"
+                        />
+                        <input class="form-control col mx-2" autocomplete="off" type="number" step="0.01" min="0" id="Value_4" name="Value 4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="8"
+                        />
+                        <input class="form-control col mx-2" autocomplete="off" type="number" step="0.01" min="0" id="Value_5" name="Value 5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="8"
+                        />
+                        <input class="form-control col mx-2" autocomplete="off" type="number" step="0.01" min="0" id="Value_6" name="Value 6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="8"
+                        />
+                    </fieldset>
+
+                </div>
+            </div>
+            <hr>
+            <div class="Doc_format form-group" name="doc_type">
+                <legend class="mb-0"> Descargar documento .csv: </legend>
+                <div class="row">
+                    <div class="filler"></div>
+                    <legend class="col-sm">Formato:</legend>
+                    <div class="form-check col-sm pl-4">
+                        <input class="form-radio-input" type="radio" name="flexRadioDefault" id="radioHorario">
+                        <label class="form-radio-label" for="radioHorario">
+                            Horario
+                        </label>
+                    </div>
+
+                    <div class="form-check col-sm pr-4">
+                        <input class="form-radio-input" type="radio" name="flexRadioDefault" id="radioCuarto">
+                        <label class="form-radio-label" for="radioCuarto">
+                            1/4 Horario
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm">
+                        <label for="start" class="date my-1">Start date:</label>
+                        <input class="form-control mx-1 my-2" type="date" id="start" name="trip-start">
+                    </div>
+                    <div class="col-sm">
+                        <label for="end" class="date my-1">End date(included):</label>
+                        <input class="form-control mx-1 my-2" type="date" id="end" name="trip-end" style=>
+                    </div>
+                </div>
+                <div class="download-btn">
+                    <button class="form-control btn btn-danger w-25 mx-auto my-1" type="button" id="download-btn">Descargar
+                        csv</button>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <div class="form-group">
+                    <legend> Entrar documento: </legend>
+                    <fieldset class="row">
+                        <div class="col-6 ">
+                            <input class="form-control w-100" type="file" id="File" name="File" accept=".xlsx,.csv" onchange="read(this)">
+                        </div>
+                        <div class="col">
+                            <input class="form-radio-input" type="radio" name="format" id="csv">
+                            <label class="form-radio-label " for="csv">
+                                .csv
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input class="form-radio-input" type="radio" name="format" id="xlsx">
+                            <label class="form-radio-label " for="xlsx">
+                                .xlsx
+                            </label>
+                        </div>
+                    </fieldset>
+                    <div class="output" id="csvtext_use" style="font-size: 0px">
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center" id="form-end">
+                    <button class="btn btn-danger w-25 col-2 mx-3 my-2" type="submit" id="submit">Enviar</button>
+                    <button class="btn btn-danger w-25 col-2 mx-3 my-2" type="reset" id="reset">Cancelar</button>
+                </div>
+            </div>
+    </form>
+</body>
+
+</html>

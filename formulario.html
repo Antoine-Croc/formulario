@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
+    <script type="text/javascript" src="js/csv_to_json.js"></script>
+    <script type="text/javascript" src="js/xlsx_to_json.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="all" type="text/css">
+    <link rel="stylesheet" href="css/formulario.css" media="all" type="text/css">
+</head>
+
+<body class="bg-light ">
+    <form name="formulario" action="formulario.php" method="post" onsubmit="return validateForm()">
+        <div class="container-fluid w-50 bg-secondary bg-gradient ">
+            <legend class="Title">--Titulo--</legend>
+
+            <div class="region">
+                <label class="region-fill">
+                    Escribe la region del cliente:
+                </label>
+                <div class="datalist-holder">
+                    <input autocomplete="off" list="region_elec" name="region_elec" class="form-control" id="region_client" onclick="populateList(regionL,'region_elec')" />
+                    <datalist id="region_elec">
+                    </datalist>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="counter-type-select" for="counter-type-select">
+                    Elije el tipo de contador:
+                </label>
+                <select id="counter-type" class="form-select" for="counter-type-select" name="counter-type" id="counter-type-select" onclick="populateList(contadorL,'counter-type')">
+                    <option value="null">--Elije a una opción--</option>
+                </select>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkbox_type" name="checkbox_type" value="Tipo_6.1">
+                <label class="form-check-label" for="checkbox_type">
+                    Tipo 6.1 (?)
+                </label><br>
+            </div>
+
+            <div class="Potency_fill form-group">
+                <legend> Potencia: </legend>
+                <fieldset id="potency_input" class="row">
+                    <input class="form-control col mx-1" autocomplete="off" type="number" step="0.1" min="0" value="0" id="Value_1" name="Value 1" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                        maxlength="8" />
+                    <input class="form-control col mx-1" autocomplete="off" type="number" step="0.1" min="0" value="0" id="Value_2" name="Value 2" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                        maxlength="8" />
+                    <input class="form-control col mx-1" autocomplete="off" type="number" step="0.1" min="0" value="0" id="Value_3" name="Value 3" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                        maxlength="8" />
+                    <input class="form-control col mx-1" autocomplete="off" type="number" step="0.1" min="0" value="0" id="Value_4" name="Value 4" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                        maxlength="8" />
+                    <input class="form-control col mx-1" autocomplete="off" type="number" step="0.1" min="0" value="0" id="Value_5" name="Value 5" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                        maxlength="8" />
+                    <input class="form-control col mx-1" autocomplete="off" type="number" step="0.1" min="0" value="0" id="Value_6" name="Value 6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number"
+                        maxlength="8" />
+                </fieldset>
+
+            </div>
+
+            <div class="Doc_format form-group col" name="doc_type">
+                <legend> Estilo de documento: </legend>
+                <div class="form-check">
+                    <input class="form-radio-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-radio-label " for="flexRadioDefault1">
+                        Horario
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-radio-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-radio-label" for="flexRadioDefault2">
+                        1/4 Horario
+                    </label>
+                </div>
+
+                <div class="download-btn">
+                    <button class="form-control btn btn-danger w-25 col-2 mx-3" type="button" id="download-btn">Download csv</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <legend> Entrar documento: </legend>
+                <fieldset class="row">
+                    <div class="col-6 ">
+                        <input class="form-control w-100" type="file" id="File" name="File" accept=".xlsx,.csv" onchange="read(this)">
+                    </div>
+                    <div class="col">
+                        <input class="form-radio-input" type="radio" name="format" id="csv">
+                        <label class="form-radio-label " for="csv">
+                            .csv
+                        </label>
+                    </div>
+                    <div class="col">
+                        <input class="form-radio-input" type="radio" name="format" id="xlsx">
+                        <label class="form-radio-label " for="xlsx">
+                            .xlsx
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="output" id="csvtext_use" style="font-size: 0px">
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <button class="form-control btn btn-danger w-25 col-2 mx-3" type="submit" id="submit">Enviar</button>
+                <button class="form-control btn btn-danger w-25 col-2 mx-3" type="reset" id="reset">Cancelar</button>
+                <button class="form-control btn btn-danger w-25 col-2 mx-3" type="button" id="test">test</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

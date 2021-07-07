@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSV validation example</title>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/readCSV.js"></script>
+    <script src="js/csv_to_json.js"></script>
+</head>
+  <body>
+    <div class="input" >
+      <input
+        type="file"
+        class="form-control"
+        id="excel-file-id"
+        accept=".xls,.xlsx,.csv"
+        onchange= "read(this)"  
+      />
+    </div>
+    <div class="output" id="csvtext_use" style="font-size:0px" >
+    </div>
+    <div>
+        <button  type="button" id="test" onclick="makecsvJson()">test</button>
+    </div>
+    <div id="result-id"></div>
+  </body>
+</html>
