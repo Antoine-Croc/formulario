@@ -1,6 +1,8 @@
 $(document).ready(function() {
     $('#File').change(function() {
         listen();
+        csvTested = false;
+        text = '';
         $('#csv').prop('checked', false);
         $('#xlsx').prop('checked', false);
     })
@@ -11,7 +13,11 @@ $(document).ready(function() {
         if ($('#csv').is(':checked')) {
             let x = formatCSV_JSON(getText());
             if (!x) {
-                $('#csv').prop('checked', false);
+                if (!csvTested) {
+                    $('#csv').prop('checked', false);
+                }
+            } else {
+                csvTested = true;
             }
         }
     })
@@ -27,7 +33,7 @@ $(document).ready(function() {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "https://pipedream.com/@antoine-croc/p_7NCGDdw/edit",
+            url: "python/run_scripts.py",
             data: $('#data').serialize(),
             success: function() {
                 alert('success');
@@ -39,6 +45,7 @@ $(document).ready(function() {
 var selectedFile;
 var text = '';
 var dataP = null;
+var csvTested = false;
 //-------------------------------
 
 function read(input) { // select file for csv parsing

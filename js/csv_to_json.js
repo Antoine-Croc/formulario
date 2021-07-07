@@ -28,9 +28,11 @@ validkeys = ["Fecha", "Hora", "Cuarto", "Consumo Activa"]; //define which column
 function formatCSV_JSON(txt) { //Big function that does what it's called
     csvArray = splitcsv(txt);
     if (typeof(csvArray) == "boolean") {
-        if (!csvArray) {
+        if (!csvArray && !csvTested) {
             alert('Archivo csv tiene malo formato')
             return false;
+        } else {
+            return true; //this case happens when file is already in JSON and client clicks on the format buttons again.
         }
     }
 
