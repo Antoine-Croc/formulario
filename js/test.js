@@ -31,12 +31,19 @@ $(document).ready(function() {
     })
     $('#form_id').on('submit', function(e) {
         e.preventDefault();
+        validateForm();
         $.ajax({
             type: "POST",
-            url: "python/run_scripts.py",
-            data: $('#data').serialize(),
+            url: "php/index.php",
+            data: $('#dataP').serialize(),
             success: function() {
-                alert('success');
+                if (data == "Error") {
+                    $("#error").show();
+                    $("#processing").hide();
+                } else {
+                    alert('success');
+                    window.location.href = "php/index.php";
+                }
             }
         });
     });
@@ -84,7 +91,7 @@ function toSave() { //recuperate values to be sent
 
 function postData(Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) {
     dataP = { "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
-    console.log(data);
+    console.log(dataP);
     return true;
 }
 
