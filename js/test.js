@@ -29,25 +29,53 @@ $(document).ready(function() {
             makexlsxJSON();
         }
     })
-    $('#form_id').on('submit', function(e) {
+    $('#submit').on('click', function(e) {
         e.preventDefault();
         validateForm();
         $.ajax({
             type: "POST",
             url: "php/index.php",
-            data: $('#dataP').serialize(),
+            data: $('#dataP'),
             success: function() {
                 if (data == "Error") {
                     $("#error").show();
                     $("#processing").hide();
                 } else {
-                    alert('success');
-                    window.location.href = "php/index.php";
+                    window.location.href = "Succesful form input .html";
+                    alert(data);
                 }
             }
         });
     });
+    $('#button').on('click', function(e) {
+        dataP = {
+                arch: "Fecha,Hora,Consumo Activa\n7/6/2021,0,1\n7/6/2021,1,1\n7/6/2021,2,1\n7/6/2021,3,1\n7/6/2021,4,2\n7/6/2021,5,2\n7/6/2021,6,2\n7/6/2021,7,2\n7/6/2021,8,3\n7/6/2021,9,3\n7/6/2021,10,3\n7/6/2021,11,3\n7/6/2021,12,4\n7/6/2021,13,4\n7/6/2021,14,4\n7/6/2021,15,4\n7/6/2021,16,4.5\n7/6/2021,17,4.735294118\n7/6/2021,18,4.970588235\n7/6/2021,19,5.205882353\n7/6/2021,20,5.441176471\n7/6/2021,21,5.676470588\n7/6/2021,22,5.911764706\n7/6/2021,23,6.147058824\n",
+                cuartoHor: false,
+                flag: true,
+                potCont: [0, 0, 0, 0, 0, 0],
+                reg: "Andalucia",
+                tar: "3.0",
+                tipoCont: 1
+            }
+            // $.post("php/index.php", dataP, function(data, status) {
+            //     // Display the recieved data in browser
+            //     console.log(data);
+            //     console.log(status);
+            // });
+        $.ajax({
+            type: "POST",
+            url: "php/index.php",
+            data: dataP,
+            async: false
+        }).done(function(data, status) {
+            console.log(data);
+            console.log(status);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            //TODO errorFunctions(); 
+        });
+    })
 });
+
 //-------------------------------
 var selectedFile;
 var text = '';

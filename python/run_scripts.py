@@ -27,14 +27,17 @@ reg = 'canarias'  # Region de tarificación del cliente
 potCont = [810, 810, 810, 810, 810, 880]  # Potencia contratada por el cliente en MW
 
 #^^^^^^^^^^^^^^^^^^^^funcion de entrada ^^^^^^^^^^^^^#
-def defineVars(archivo, cuartoH, flg, tipoC, tarifa, region):
-    arch = archivo
-    cuartoHor = cuartoH
-    flag = flg
-    tipoCont = tipoC
-    tar = tarifa
-    reg = region
-
+# def defineVars(archivo, cuartoH, flg, tipoC, tarifa, region, potC):
+#     arch = archivo
+#     cuartoHor = cuartoH
+#     flag = flg
+#     tipoCont = tipoC
+#     tar = tarifa
+#     reg = region
+#     potCont = []
+#     for i in range(len(potC)):
+#         potCont.append(int(potC[i]))
+    
 
 # ^^^^^^^^^^^^ FUNCION SONORA PARA INDICAR QUE SE HA ALCANZADO LAS POTENCIAS OPTIMAS ^^^^^^^^^^#
 def make_noise():
