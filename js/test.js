@@ -35,16 +35,13 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "php/index.php",
-            data: $('#dataP'),
-            success: function() {
-                if (data == "Error") {
-                    $("#error").show();
-                    $("#processing").hide();
-                } else {
-                    window.location.href = "Succesful form input .html";
-                    alert(data);
-                }
-            }
+            data: dataP,
+            async: false
+        }).done(function(data, status) {
+            console.log(data);
+            console.log(status);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            //TODO errorFunctions(); 
         });
     });
     $('#button').on('click', function(e) {
@@ -80,6 +77,7 @@ $(document).ready(function() {
 var selectedFile;
 var text = '';
 var dataP = null;
+var dataStr = null;
 var csvTested = false;
 //-------------------------------
 
@@ -120,6 +118,7 @@ function toSave() { //recuperate values to be sent
 function postData(Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) {
     dataP = { "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
     console.log(dataP);
+    //dataStr = JSON.stringify(dataP)
     return true;
 }
 
