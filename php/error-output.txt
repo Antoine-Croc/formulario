@@ -34,3 +34,65 @@ Traceback (most recent call last):
   File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\json\decoder.py", line 353, in raw_decode
     obj, end = self.scan_once(s, idx)
 json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 30, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 9, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 30, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 9, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 30, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 9, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 30, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 9, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 30, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 9, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 32, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 9, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 37, in <module>
+    fixJson(content)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 10, in fixJson
+    if jf["flag"] == "true":
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 36, in <module>
+    print(content["flag"])
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 37, in <module>
+    print(content["flag"])
+TypeError: string indices must be integers
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 37, in <module>
+    print(content("flag"))
+TypeError: 'str' object is not callable
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 36, in <module>
+    print(content.keys())
+AttributeError: 'str' object has no attribute 'keys'
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 37, in <module>
+    print(content["flag"])
+TypeError: string indices must be integers

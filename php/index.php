@@ -5,43 +5,8 @@
 
 <body>
     <?PHP
-
-    function is_json($string, $return_data = false)
-    {
-        $data = json_decode($string, true);
-        return (json_last_error() == JSON_ERROR_NONE) ? ($return_data ? $data : TRUE) : FALSE;
-    }
-    $dataP = '{
-        "arch": "Fecha,Hora,Consumo Activa\n7/6/2021,0,1\n7/6/2021,1,1\n7/6/2021,2,1\n7/6/2021,3,1\n7/6/2021,4,2\n7/6/2021,5,2\n7/6/2021,6,2\n7/6/2021,7,2\n7/6/2021,8,3\n7/6/2021,9,3\n7/6/2021,10,3\n7/6/2021,11,3\n7/6/2021,12,4\n7/6/2021,13,4\n7/6/2021,14,4\n7/6/2021,15,4\n7/6/2021,16,4.5\n7/6/2021,17,4.735294118\n7/6/2021,18,4.970588235\n7/6/2021,19,5.205882353\n7/6/2021,20,5.441176471\n7/6/2021,21,5.676470588\n7/6/2021,22,5.911764706\n7/6/2021,23,6.147058824\n",
-        "cuartoHor": false,
-        "flag": true,
-        "potCont": [0, 0, 0, 0, 0, 0],
-        "reg": "Andalucia",
-        "tar": "3.0",
-        "tipoCont": 1
-    }';
-
-    // $dataArray = json_decode($dataP,true);
-    // $archivo = $dataArray["arch"];
-    // $cuarto = $dataArray["cuartoHor"];
-    // $flag = $dataArray["flag"];
-    // $potCont = $dataArray["potCont"];
-    // $region = $dataArray["reg"];
-    // $tarifa = $dataArray["tar"];
-    // $tipoCont = $dataArray["tipoCont"];
-
-    // var_dump($archivo1);
-    // var_dump($cuarto1);
-    // var_dump($flag1);
-    // var_dump($potCont1);
-    // var_dump($region1);
-    // var_dump($tarifa1);
-    // var_dump($tipoCont1);
-
-    echo "--------------------------------------- \n";
-
     $Jdata = ($_REQUEST);
-    var_dump($Jdata);  
+    //var_dump($Jdata);  
 
 
 
@@ -59,13 +24,13 @@
     
     $tipoCont = intval($tipoCont);
     
-    var_dump($archivo);
-    var_dump($cuarto);
-    var_dump($flag);
-    var_dump($potCont);
-    var_dump($region);
-    var_dump($tarifa);
-    var_dump($tipoCont);
+    // var_dump($archivo);
+    // var_dump($cuarto);
+    // var_dump($flag);
+    // var_dump($potCont);
+    // var_dump($region);
+    // var_dump($tarifa);
+    // var_dump($tipoCont);
 
     $data = base64_encode(json_encode($dataP));
 

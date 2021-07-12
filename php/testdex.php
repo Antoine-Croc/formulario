@@ -38,7 +38,7 @@ if (is_resource($process)) {
     // Any error output will be appended to /tmp/error-output.txt
 
     fwrite($pipes[0], '2');
-    fwrite($pipes[0], $argument);
+    fwrite($pipes[0], $argument);   
     fclose($pipes[0]);
 
     echo stream_get_contents($pipes[1]);
