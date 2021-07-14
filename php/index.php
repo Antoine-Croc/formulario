@@ -1,42 +1,8 @@
-<head>
-    <title>run my python files</title>
-    <meta charset="UTF-8" />
-</head>
-
-<body>
     <?PHP
-    $Jdata = ($_REQUEST);
+    $name = $_REQUEST["name"];
+   // var_dump($name);
+//---------------------PIPE----------------------------------
 
-
-    for ($i = 0; $i < count($Jdata["potCont"]); $i++) {
-        $Jdata["potCont"][$i] = intval($Jdata["potCont"][$i]);
-    }
-    
-    $Jdata["tipoCont"] = intval($Jdata["tipoCont"]);
-  
-    // $archivo = $Jdata["arch"];
-    // $cuarto = $Jdata["cuartoHor"];
-    // $flag = $Jdata["flag"];
-    // $potCont = $Jdata["potCont"];
-    // $region = $Jdata["reg"];
-    // $tarifa = $Jdata["tar"];
-    // $tipoCont = $Jdata["tipoCont"];    
-    // var_dump($archivo);
-    // var_dump($cuarto);
-    // var_dump($flag);
-    // var_dump($potCont);
-    // var_dump($region);
-    // var_dump($tarifa);
-    // var_dump($tipoCont);
-
-    //var_dump($Jdata);
-    
-    $Jdata = json_encode($Jdata);
-
-    $data = base64_encode(json_encode($Jdata));
-
-    var_dump($data);
-    
     $argument = "please_work i beg";
 
     $descriptorspec = array(
@@ -45,7 +11,7 @@
         2 => array("file", "error-output.txt", "a") // stderr is a file to write to
     );
 
-    $cmd = "python ../python/test.py $data";
+    $cmd = "python ../python/test.py $name";
 
     $process = proc_open($cmd, $descriptorspec, $pipes);
 
@@ -59,14 +25,11 @@
         //  1 => readable handle connected to child stdout
         //  Any error output will be appended to /tmp/error-output.txt
 
-        fwrite($pipes[0], $data);
+        fwrite($pipes[0], '');
         fwrite($pipes[0], $argument);
         fclose($pipes[0]);
 
         echo stream_get_contents($pipes[1]); //print what python prints
-        while (!feof($pipes[1])) {
-            $out .= fgets($pipes[1], 1024);
-        }
         fclose($pipes[1]);
 
         //  It is important that you close any pipes before calling
@@ -76,4 +39,3 @@
         echo "command returned $return_value\n";
     }
     ?>
-</body>

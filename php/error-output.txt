@@ -205,3 +205,21 @@ Traceback (most recent call last):
 IndexError: list index out of range
 The command line is too long.
 The command line is too long.
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 16, in <module>
+    content=base64.b64decode(input)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 16, in <module>
+    content=base64.b64decode(input)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 16, in <module>
+    content=base64.b64decode(input)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
