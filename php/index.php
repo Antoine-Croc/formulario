@@ -6,24 +6,21 @@
 <body>
     <?PHP
     $Jdata = ($_REQUEST);
-    //var_dump($Jdata);  
 
 
-
-    $archivo = $Jdata["arch"];
-    $cuarto = $Jdata["cuartoHor"];
-    $flag = $Jdata["flag"];
-    $potCont = $Jdata["potCont"];
-    $region = $Jdata["reg"];
-    $tarifa = $Jdata["tar"];
-    $tipoCont = $Jdata["tipoCont"];
-
-    for ($i = 0; $i < count($potCont); $i++) {
-        $potCont[$i] = intval($potCont[$i]);
+    for ($i = 0; $i < count($Jdata["potCont"]); $i++) {
+        $Jdata["potCont"][$i] = intval($Jdata["potCont"][$i]);
     }
     
-    $tipoCont = intval($tipoCont);
-    
+    $Jdata["tipoCont"] = intval($Jdata["tipoCont"]);
+  
+    // $archivo = $Jdata["arch"];
+    // $cuarto = $Jdata["cuartoHor"];
+    // $flag = $Jdata["flag"];
+    // $potCont = $Jdata["potCont"];
+    // $region = $Jdata["reg"];
+    // $tarifa = $Jdata["tar"];
+    // $tipoCont = $Jdata["tipoCont"];    
     // var_dump($archivo);
     // var_dump($cuarto);
     // var_dump($flag);
@@ -32,8 +29,14 @@
     // var_dump($tarifa);
     // var_dump($tipoCont);
 
-    $data = base64_encode(json_encode($dataP));
+    //var_dump($Jdata);
+    
+    $Jdata = json_encode($Jdata);
 
+    $data = base64_encode(json_encode($Jdata));
+
+    var_dump($data);
+    
     $argument = "please_work i beg";
 
     $descriptorspec = array(
@@ -42,11 +45,13 @@
         2 => array("file", "error-output.txt", "a") // stderr is a file to write to
     );
 
-    $cwd = null;
-    $env = null;
     $cmd = "python ../python/test.py $data";
 
-    $process = proc_open($cmd, $descriptorspec, $pipes, $cwd, $env);
+    $process = proc_open($cmd, $descriptorspec, $pipes);
+
+    stream_set_read_buffer($pipes[1], 0);
+    stream_set_blocking($pipes[0], false);
+    stream_set_blocking($pipes[1], false);
 
     if (is_resource($process)) {
         //  $pipes now looks like this:
@@ -54,11 +59,14 @@
         //  1 => readable handle connected to child stdout
         //  Any error output will be appended to /tmp/error-output.txt
 
-        fwrite($pipes[0], '2');
+        fwrite($pipes[0], $data);
         fwrite($pipes[0], $argument);
         fclose($pipes[0]);
 
-        echo stream_get_contents($pipes[1]);
+        echo stream_get_contents($pipes[1]); //print what python prints
+        while (!feof($pipes[1])) {
+            $out .= fgets($pipes[1], 1024);
+        }
         fclose($pipes[1]);
 
         //  It is important that you close any pipes before calling

@@ -17,7 +17,14 @@
 <body>
     <form name="formulario" id="form_id">
         <div class="container-fluid w-50 bg-secondary bg-gradient">
-            <legend class="Title">--Titulo--</legend>
+            <div class='row'>
+                <div class="col-sm">
+                    <legend class="Title">--Titulo--</legend>
+                </div>
+                <div class="col-sm">
+                    <img src="ingebau-logo50p.png" alt="Ingebau">
+                </div>
+            </div>
             <div>
                 <legend class="client">Información cliente:</legend>
                 <div class="row">
@@ -43,11 +50,8 @@
                         <label class="rate-type-select" for="rate-type-select">
                         Tarifa antiguo:
                     </label>
-                        <select id="rate-type" class="form-select" for="rate-type-select" name="rate-type" id="rate-type-select">
-                        <option value="null">--Elije a una opción--</option>
-                        <option value="6.1A">tarifa 6.1A</option>
-                        <option value="3.0">tarifa 3.0</option>
-                        <option value="3.1A">tarifa 3.1A</option>   
+                        <select id="rate-type" class="form-select" for="rate-type-select" name="rate-type" id="rate-type-select" onclick="populateList(tarifaL,'rate-type') ">
+                        <option value="null">--Elije a una opción--</option> 
                     </select>
                     </div>
                 </div>
@@ -91,11 +95,11 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm">
-                        <label for="start" class="date my-1">Start date:</label>
+                        <label for="start" class="date my-1">Fecha de inicio:</label>
                         <input class="form-control mx-1 my-2" type="date" id="start" name="trip-start">
                     </div>
                     <div class="col-sm">
-                        <label for="end" class="date my-1">End date(included):</label>
+                        <label for="end" class="date my-1">Fecha de fin(incluida):</label>
                         <input class="form-control mx-1 my-2" type="date" id="end" name="trip-end" style=>
                     </div>
                 </div>
