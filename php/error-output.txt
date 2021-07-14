@@ -223,3 +223,22 @@ Traceback (most recent call last):
   File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\base64.py", line 87, in b64decode
     return binascii.a2b_base64(s)
 binascii.Error: Invalid base64-encoded string: number of data characters (5) cannot be 1 more than a multiple of 4
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 16, in <module>
+    print(x)
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 16, in <module>
+    print(x)
+OSError: [Errno 22] Invalid argument
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument
+t
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test.py", line 16, in <module>
+    print(x)
+OSError: [Errno 22] Invalid argument
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument

@@ -51,14 +51,25 @@ $(document).ready(function() {
         //console.log(dataP);
         $.ajax({
             type: "POST",
-            url: "php/index.php",
+            url: "php/makefile.php",
             data: dataP,
             async: false
+        }).done(function(data, status) {
+            fname = { "name": data };
+            console.log(status);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            //TODO errorFunctions(); 
+        });
+        $.ajax({
+            type: "POST",
+            url: "php/index.php",
+            data: fname,
+            async: true
         }).done(function(data, status) {
             console.log(data);
             console.log(status);
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            //TODO errorFunctions(); 
+            alert('ya done goofed') //TODO errorFunctions(); 
         });
     });
     $('#button').on('click', function(e) {
