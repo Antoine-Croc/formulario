@@ -48,7 +48,6 @@ $(document).ready(function() {
     $('#submit').on('click', function(e) {
         e.preventDefault();
         validateForm();
-        //console.log(dataP);
         $.ajax({
             type: "POST",
             url: "php/makefile.php",
@@ -62,7 +61,7 @@ $(document).ready(function() {
         });
         $.ajax({
             type: "POST",
-            url: "php/index.php",
+            url: "php/sendname.php",
             data: fname,
             async: true
         }).done(function(data, status) {
@@ -88,21 +87,24 @@ $(document).ready(function() {
             data: dataP,
             async: false
         }).done(function(data, status) {
-            fname = { "name": data };
+            fname = data.split('.')[0].split('_');
+            fnameJ = { "name": data };
             console.log(status);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             //TODO errorFunctions(); 
         });
         $.ajax({
             type: "POST",
-            url: "php/index.php",
-            data: fname,
-        }).done(function(data, status) {
-            console.log(data);
-            console.log(status);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
+            url: "php/sendname.php",
+            data: fnameJ,
+        }).done(function() {}).fail(function(jqXHR, textStatus, errorThrown) {
             //TODO errorFunctions(); 
         });
+        param = '?param=' + fname[1]
+            // for (var i = 1; i < fname.length; i++) {
+            //     param += "&param{" + i + "}=" + fname[i]
+            // } to use if multiple output arguments wanted
+        window.location.href = "done.html" + param
     })
 });
 

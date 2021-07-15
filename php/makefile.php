@@ -37,6 +37,6 @@ file_put_contents($name, json_encode($Jdata));
 
 //echo 'data written in file';
 
-sleep(3);
+//sleep(3);
 
 echo $name;

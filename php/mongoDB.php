@@ -12,21 +12,15 @@
 //        var_dump($cursor);
         foreach ( $cursor as $array) {
             echo(json_encode((array) $array));
+         //   $please = json_decode(json_encode($array));
+        //   echo $please ;
            }
 
     } catch (MongoDB\Driver\Exception\Exception $e) {
-        echo 'send help';
-        $filename = basename(__FILE__);
-        
-        echo "The $filename script has experienced an error.\n"; 
-        echo "It failed with the following exception:\n";
-         
-        echo "Exception:", $e->getMessage(), "\n";
-        echo "In file:", $e->getFile(), "\n";
-        echo "On line:", $e->getLine(), "\n";       
+        //TODO
     }
-
+    // phptest
     // $region = ['Andalucia', 'Canarias_1', 'Canarias_2']; //replace with list from MongoDB 
     // echo json_encode($region);
-    
+
     ?>

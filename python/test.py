@@ -1,17 +1,17 @@
 import sys
 import json
 from pathlib import Path
-import pathlib
 import time
-
-
-# if __name__=='__main__':
 
 input = sys.argv[1]
 
-txt = Path(input).read_text()
-JsonF = json.loads(txt)
+if __name__=='__main__':
 
-t = open('testingtext.txt','w')
-t.write(JsonF['arch'])
-t.close()
+    time.sleep(60)
+
+    txt = Path(input).read_text()
+    JsonF = json.loads(txt)
+    nameexit='finished'+input
+    t = open(nameexit,'w')
+    t.write(JsonF['arch'])
+    t.close()
