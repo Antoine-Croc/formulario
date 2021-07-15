@@ -247,7 +247,7 @@ function validateForm() { //verify all elements are conform to the required form
         var format_csv = false;
     }
     if (!format_csv && !format_xlsx) {
-        alert("Elije un tipo de documento (csv/xlsx)")
+        alert("Elije un tipo de archivo (csv/xlsx)")
         return false;
     }
 

@@ -3,6 +3,9 @@
 import sys
 import os
 
+from pathlib import Path
+import json
+
 if os.path.exists('C:/'):
     sys.path.insert(0, 'C:\xampp\htdocs\ingebau\formulario\excel_python')
 elif os.path.exists('/home'):
@@ -18,26 +21,26 @@ import energias_NT
 import winsound
 
 # ^^^^^^^^^^^^ DATOS DE ENTRADA ^^^^^^^^^^#
-arch = 'curvaFinal_PR_Desaladora_6_1_A_CH'  # Curva de potencias comnsumidas del cliente
-cuartoHor = True  # Si el archivo de curvas de consumos es cuartohorario
-flag = False  # Dejar true si la tarifa antigua es distinta de 6.1 A
-tipoCont = 2  # Contador de medida del cliente
-tar = '6.1A'  # Tarifa antigua del cliente
-reg = 'canarias'  # Region de tarificación del cliente
-potCont = [810, 810, 810, 810, 810, 880]  # Potencia contratada por el cliente en MW
+inputN = sys.argv[1] #filename
 
-#^^^^^^^^^^^^^^^^^^^^funcion de entrada ^^^^^^^^^^^^^#
-# def defineVars(archivo, cuartoH, flg, tipoC, tarifa, region, potC):
-#     arch = archivo
-#     cuartoHor = cuartoH
-#     flag = flg
-#     tipoCont = tipoC
-#     tar = tarifa
-#     reg = region
-#     potCont = []
-#     for i in range(len(potC)):
-#         potCont.append(int(potC[i]))
-    
+txt = Path(inputN).read_text()
+JsonF = json.loads(txt)
+
+arch = JsonF['arch']  
+cuartoHor = JsonF['cuartoHor']  
+flag = JsonF['flag']  
+tipoCont = JsonF['tipoCont']  
+tar = JsonF['tar']  
+reg = JsonF['reg']  
+potCont = JsonF["potCont"]  
+
+# arch = 'curvaFinal_PR_Desaladora_6_1_A_CH'  # Curva de potencias comnsumidas del cliente
+# cuartoHor = True  # Si el archivo de curvas de consumos es cuartohorario
+# flag = False  # Dejar true si la tarifa antigua es distinta de 6.1 A
+# tipoCont = 2  # Contador de medida del cliente
+# tar = '6.1A'  # Tarifa antigua del cliente
+# reg = 'canarias'  # Region de tarificación del cliente
+# potCont = [810, 810, 810, 810, 810, 880]  # Potencia contratada por el cliente en MW
 
 # ^^^^^^^^^^^^ FUNCION SONORA PARA INDICAR QUE SE HA ALCANZADO LAS POTENCIAS OPTIMAS ^^^^^^^^^^#
 def make_noise():

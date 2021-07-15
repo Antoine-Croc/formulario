@@ -18,7 +18,7 @@ $Jdata["tipoCont"] = intval($Jdata["tipoCont"]);
 // $tarifa = $Jdata["tar"];
 // $tipoCont = $Jdata["tipoCont"];    
 // var_dump($archivo);
-// var_dump($cuarto);
+// var_dump($cuarto);   
 // var_dump($flag);
 // var_dump($potCont);
 // var_dump($region);
@@ -27,7 +27,9 @@ $Jdata["tipoCont"] = intval($Jdata["tipoCont"]);
 
 //var_dump($Jdata);
 
-$name = "getmeoutofhere.txt";
+$when = date("h;i;s_d-m-Y");
+
+$name = ($Jdata["reg"].'_'.$when.'.txt');
 
 //echo 'file named';
 

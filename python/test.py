@@ -9,7 +9,9 @@ import time
 
 input = sys.argv[1]
 
-txt = Path('getmeoutofhere.txt').read_text()
-t = open("testingtext.txt", 'x')
-t.write(txt)
+txt = Path(input).read_text()
+JsonF = json.loads(txt)
+
+t = open('testingtext.txt','w')
+t.write(JsonF['arch'])
 t.close()
