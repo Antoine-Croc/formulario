@@ -21,7 +21,7 @@ $when = date("h;i;s_d-m-Y");
 
 $name = ($Jdata["reg"].'_'.$when.'.txt');
 
-file_put_contents($name, json_encode($Jdata)); //crear el archivo y cargar los datos adentro 
+file_put_contents('../jsonfiles/'.$name, json_encode($Jdata)); //crear el archivo y cargar los datos adentro 
 
 echo $name;
 ?>
