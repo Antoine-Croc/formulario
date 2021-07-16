@@ -48,28 +48,30 @@ $(document).ready(function() {
     $('#submit').on('click', function(e) {
         e.preventDefault();
         validateForm();
-        $.ajax({
+        $.ajax({ //enviar los datos en php para cargarlos en un archivo .txt
             type: "POST",
             url: "php/makefile.php",
             data: dataP,
             async: false
         }).done(function(data, status) {
-            fname = { "name": data };
+            fname = data.split('.')[0]; // recuperar el nombre del archive sin el .txt
+            fnameJ = { "name": data }; // aqui tiene el .txt
             console.log(status);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             //TODO errorFunctions(); 
         });
-        $.ajax({
+        $.ajax({ // //enviar el nombre del archivo al python
             type: "POST",
             url: "php/sendname.php",
-            data: fname,
-            async: true
-        }).done(function(data, status) {
-            console.log(data);
-            console.log(status);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            alert('ya done goofed') //TODO errorFunctions(); 
+            data: fnameJ,
+        }).done(function() {}).fail(function(jqXHR, textStatus, errorThrown) {
+            //TODO errorFunctions(); 
         });
+
+        param = '?param=' + fname // Enviar el nombre del archivo en caso que el cliente no reciba el correo
+        window.location.href = "done.html" + param
+
+
     });
     $('#button').on('click', function(e) {
         dataP = {
@@ -87,7 +89,7 @@ $(document).ready(function() {
             data: dataP,
             async: false
         }).done(function(data, status) {
-            fname = data.split('.')[0].split('_');
+            fname = data.split('.')[0];
             fnameJ = { "name": data };
             console.log(status);
         }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -100,7 +102,7 @@ $(document).ready(function() {
         }).done(function() {}).fail(function(jqXHR, textStatus, errorThrown) {
             //TODO errorFunctions(); 
         });
-        param = '?param=' + fname[1]
+        param = '?param=' + fname
             // for (var i = 1; i < fname.length; i++) {
             //     param += "&param{" + i + "}=" + fname[i]
             // } to use if multiple output arguments wanted
@@ -154,7 +156,7 @@ function toSave() { //recuperate values to be sent
     return postData(val_archivoJSON, val_cuartHorario, val_Ntarifa61, val_contador, val_tarifaantigua, val_region, val_potency)
 }
 
-function postData(Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) {
+function postData(Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) { //preparar la forma json para el archivo
     dataP = { "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
     return true;
 }

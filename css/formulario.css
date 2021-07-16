@@ -9,6 +9,14 @@ form {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+form .container-fluid {
+    width: 70%;
+    border: 5px solid #B22222;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 form .Title {
     font-size: 36px;
     text-align: center;

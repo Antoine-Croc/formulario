@@ -1,5 +1,6 @@
 $(document).ready(function() {
     document.getElementById('hulp').innerText = getUrlVars().replaceAll(';', ':')
+        //document.getElementById('hulp').innerText = "12:34:56"
 })
 
 
