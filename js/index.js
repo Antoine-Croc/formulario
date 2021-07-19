@@ -15,8 +15,9 @@ $(document).ready(function() {
         //TODO errorFunctions(); 
     });
 
-    $('#File').change(function() {
-        listen();
+    $('#file').change(function() {
+        selectedFile = this.files[0]
+        formD.append("file", selectedFile)
         csvTested = false;
         text = '';
         $('#csv').prop('checked', false);
@@ -48,6 +49,17 @@ $(document).ready(function() {
     $('#submit').on('click', function(e) {
         e.preventDefault();
         validateForm();
+        $.ajax({
+            type: "POST",
+            url: "php/uploadfile.php",
+            cache: false,
+            contentType: false,
+            processData: false,
+            async: false,
+            data: formD,
+        }).done(function(response) {
+            console.log(response)
+        });
         $.ajax({ //enviar los datos en php para cargarlos en un archivo .txt
             type: "POST",
             url: "php/makefile.php",
@@ -55,7 +67,7 @@ $(document).ready(function() {
             async: false
         }).done(function(data, status) {
             fname = data.split('.')[0]; // recuperar el nombre del archive sin el .txt
-            fnameJ = { "name": data }; // aqui tiene el .txt
+            fnameJ = { "name": fname }; // aqui tiene el .txt
             console.log(status);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             //TODO errorFunctions(); 
@@ -73,45 +85,46 @@ $(document).ready(function() {
 
 
     });
-    $('#button').on('click', function(e) {
-        dataP = {
-            arch: "Fecha,Hora,Consumo Activa\n7/6/2021,0,1\n7/6/2021,1,1\n7/6/2021,2,1\n7/6/2021,3,1\n7/6/2021,4,2\n7/6/2021,5,2\n7/6/2021,6,2\n7/6/2021,7,2\n7/6/2021,8,3\n7/6/2021,9,3\n7/6/2021,10,3\n7/6/2021,11,3\n7/6/2021,12,4\n7/6/2021,13,4\n7/6/2021,14,4\n7/6/2021,15,4\n7/6/2021,16,4.5\n7/6/2021,17,4.735294118\n7/6/2021,18,4.970588235\n7/6/2021,19,5.205882353\n7/6/2021,20,5.441176471\n7/6/2021,21,5.676470588\n7/6/2021,22,5.911764706\n7/6/2021,23,6.147058824\n",
-            cuartoHor: false,
-            flag: true,
-            potCont: [0, 0, 0, 0, 0, 0],
-            reg: "Andalucia",
-            tar: "3.0",
-            tipoCont: 1
-        }
-        $.ajax({
-            type: "POST",
-            url: "php/makefile.php",
-            data: dataP,
-            async: false
-        }).done(function(data, status) {
-            fname = data.split('.')[0];
-            fnameJ = { "name": data };
-            console.log(status);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-            //TODO errorFunctions(); 
-        });
-        $.ajax({
-            type: "POST",
-            url: "php/sendname.php",
-            data: fnameJ,
-        }).done(function() {}).fail(function(jqXHR, textStatus, errorThrown) {
-            //TODO errorFunctions(); 
-        });
-        param = '?param=' + fname
-            // for (var i = 1; i < fname.length; i++) {
-            //     param += "&param{" + i + "}=" + fname[i]
-            // } to use if multiple output arguments wanted
-        window.location.href = "done.html" + param
-    })
+    // $('#button').on('click', function(e) {
+    //     dataP = {
+    //         arch: "Fecha,Hora,Consumo Activa\n7/6/2021,0,1\n7/6/2021,1,1\n7/6/2021,2,1\n7/6/2021,3,1\n7/6/2021,4,2\n7/6/2021,5,2\n7/6/2021,6,2\n7/6/2021,7,2\n7/6/2021,8,3\n7/6/2021,9,3\n7/6/2021,10,3\n7/6/2021,11,3\n7/6/2021,12,4\n7/6/2021,13,4\n7/6/2021,14,4\n7/6/2021,15,4\n7/6/2021,16,4.5\n7/6/2021,17,4.735294118\n7/6/2021,18,4.970588235\n7/6/2021,19,5.205882353\n7/6/2021,20,5.441176471\n7/6/2021,21,5.676470588\n7/6/2021,22,5.911764706\n7/6/2021,23,6.147058824\n",
+    //         cuartoHor: false,
+    //         flag: true,
+    //         potCont: [0, 0, 0, 0, 0, 0],
+    //         reg: "Andalucia",
+    //         tar: "3.0",
+    //         tipoCont: 1
+    //     }
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "php/makefile.php",
+    //         data: dataP,
+    //         async: false
+    //     }).done(function(data, status) {
+    //         fname = data.split('.')[0];
+    //         fnameJ = { "name": data };
+    //         console.log(status);
+    //     }).fail(function(jqXHR, textStatus, errorThrown) {
+    //         //TODO errorFunctions(); 
+    //     });
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "php/sendname.php",
+    //         data: fnameJ,
+    //     }).done(function() {}).fail(function(jqXHR, textStatus, errorThrown) {
+    //         //TODO errorFunctions(); 
+    //     });
+    //     param = '?param=' + fname
+    //         // for (var i = 1; i < fname.length; i++) {
+    //         //     param += "&param{" + i + "}=" + fname[i]
+    //         // } to use if multiple output arguments wanted
+    //     window.location.href = "done.html" + param
+    // })
 });
 
 //-------------------------------
 var selectedFile;
+var formD = new FormData;
 var text = '';
 var dataP = null;
 var dataStr = null;
@@ -120,20 +133,17 @@ var regionL = [];
 var contadorL = ["1", "2", "3", "4", "5"];
 var tarifaL = []
 var fname = '';
+var filename = '';
 //-------------------------------
 
 function read(input) { // select file for csv parsing
-    var file = document.getElementById("File");
-    var fileName = file.value;
+    var file = document.getElementById("file");
+    fileName = file.value;
     var extension = fileName.substring(fileName.lastIndexOf('.') + 1); //grab extension string value
     if (extension == "CSV" || extension == "csv") { //secondary verification of file extension
         const csv = input.files[0];
         text = reader.readAsText(csv);
     }
-}
-
-function listen() { //select file for xlsx parsing, different method from csv due to encoding
-    selectedFile = document.getElementById('File').files[0]
 }
 
 function toSave() { //recuperate values to be sent
@@ -144,6 +154,7 @@ function toSave() { //recuperate values to be sent
     var val_region = document.getElementById("region_client").value;
     var val_contador = parseInt(document.getElementById("counter-type").value);
     var val_archivoJSON = document.getElementById("csvtext_use").innerText;
+    var val_Narchivo = fileName.split('\\')[2];
 
     val_Ntarifa61 = (val_tarifaantigua != "6.1A");
 
@@ -153,19 +164,19 @@ function toSave() { //recuperate values to be sent
         val_potency.push(parseInt($(`#Value_${i}`).val()));
     }
 
-    return postData(val_archivoJSON, val_cuartHorario, val_Ntarifa61, val_contador, val_tarifaantigua, val_region, val_potency)
+    return postData(val_archivoJSON, val_Narchivo, val_cuartHorario, val_Ntarifa61, val_contador, val_tarifaantigua, val_region, val_potency)
 }
 
-function postData(Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) { //preparar la forma json para el archivo
-    dataP = { "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
+function postData(AJson, Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) { //preparar la forma json para el archivo
+    dataP = { "JsonArch": AJson, "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
     return true;
 }
 
 function verifyFileFormat() { //does what it's called
     if ($('#csv').is(':checked')) {
-        var file = document.getElementById("File");
-        var fileName = file.value;
-        var extension = fileName.substring(fileName.lastIndexOf('.') + 1); //grab extension string value
+        var file = document.getElementById("file");
+        fileName = file.value;
+        var extension = fileName.substring(fileName.lastIndexOf('.') + 1); //extension string value
         if (extension == "CSV" || extension == "csv") {
             return true;
         } else {
@@ -175,9 +186,9 @@ function verifyFileFormat() { //does what it's called
         }
     }
     if ($('#xlsx').is(':checked')) {
-        var file = document.getElementById("File");
-        var fileName = file.value;
-        var extension = fileName.substring(fileName.lastIndexOf('.') + 1); //grab extension string value
+        var file = document.getElementById("file");
+        fileName = file.value;
+        var extension = fileName.substring(fileName.lastIndexOf('.') + 1); //extension string value
         if (extension == "XLSX" || extension == "xlsx") {
             return true;
         } else {

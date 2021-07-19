@@ -17,7 +17,7 @@ $Jdata["tipoCont"] = intval($Jdata["tipoCont"]);
 // var_dump($Jdata["tipoCont"]);
 // var_dump($Jdata);
 
-$when = date("h;i;s_d-m-Y");
+$when = date("his_dmY");
 
 $name = ($Jdata["reg"].'_'.$when.'.txt');
 

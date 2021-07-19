@@ -2,15 +2,14 @@
 
 import sys
 import os
-from pathlib import Path
-import json
 
-if os.path.exists('C:/'):
-    sys.path.insert(0, 'C:\xampp\htdocs\ingebau\formulario\excel_python')
+if os.path.exists('O:/'):
+    sys.path.insert(0, 'O:/INGEBAU/Becarios/Data_Utils')
 elif os.path.exists('/home'):
     sys.path.insert(0, '/home/ec2-user/Scripts/data_utils')
 import path as ph
-
+import json
+from pathlib import Path 
 import pandas as pd
 import potencias_OT
 import potencias_NT
@@ -22,7 +21,7 @@ import winsound
 # ^^^^^^^^^^^^ DATOS DE ENTRADA ^^^^^^^^^^#
 inputN = sys.argv[1] #filename
 
-txt = Path(inputN).read_text()
+txt = Path('../jsonfiles/'+inputN+'.txt').read_text()
 JsonF = json.loads(txt)
 
 arch = JsonF['arch']  
