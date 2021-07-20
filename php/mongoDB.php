@@ -1,4 +1,4 @@
-   <?PHP
+   <?PHP //database call to recuperate available regions/tariffs
     try {
         $mng = new MongoDB\Driver\Manager("mongodb://ingebau:ingebau@ec2-35-180-97-236.eu-west-3.compute.amazonaws.com:27017/gdc");        
 

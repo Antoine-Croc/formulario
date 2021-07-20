@@ -1,4 +1,4 @@
-<?php
+<?php //create json file with client configuration
 $Jdata = ($_REQUEST); 
 
 //aqui todo sale como string, hay que transformar los datos que se necesitan en int con intval()
