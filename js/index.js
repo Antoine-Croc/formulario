@@ -129,7 +129,6 @@ $(document).ready(function() {
             param = '?param=' + fname // Enviar el nombre del archivo en caso que el cliente no reciba el correo
             window.location.href = "done.html" + param
         }
-
     });
 
     $('#button').on('click', function(e) {
@@ -137,9 +136,12 @@ $(document).ready(function() {
         var f = validateForm();
         $.ajax({
             type: "GET",
-            url: null,
+            url: 'php/getlink.php',
             data: null,
-        }).done(function() {}).fail(function(jqXHR, exception) {
+            async: false,
+        }).done(function(response) {
+            dataP["link"] = response;
+        }).fail(function(jqXHR, exception) {
             var msg = '';
             if (jqXHR.status === 0) {
                 msg = 'Not connect.\n Verify Network.';
