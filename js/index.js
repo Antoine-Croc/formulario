@@ -4,7 +4,7 @@ $(document).ready(function() {
         url: "php/mongoDB.php",
     }).done(function(data) {
         try {
-            Array.isArray(JSON.parse(data))
+            console.log(JSON.parse(data))
             regionL = JSON.parse(data).regions
             tarifaL = JSON.parse(data).tarifsold
         } catch (err) {
@@ -65,67 +65,67 @@ $(document).ready(function() {
     $('#submit').on('click', function(e) {
         e.preventDefault();
         var f = validateForm();
-        $.ajax({
-            type: "POST",
-            url: "php/uploadfile.php",
-            cache: false,
-            contentType: false,
-            processData: false,
-            async: false,
-            data: formD,
-        }).done(function(response) {
-            //console.log(response)
-        });
-        $.ajax({ //enviar los datos en php para cargarlos en un archivo .txt
-            type: "POST",
-            url: "php/makefile.php",
-            data: dataP,
-            async: false
-        }).done(function(data, status) {
-            fname = data.split('.')[0]; // recuperar el nombre del archive sin el .txt
-            fnameJ = { "name": fname }; // aqui tiene el .txt
-            console.log(status);
-        }).fail(function(jqXHR, exception) {
-            var msg = '';
-            if (jqXHR.status === 0) {
-                msg = 'Not connect.\n Verify Network.';
-            } else if (jqXHR.status == 404) {
-                msg = 'Requested page not found. [404]';
-            } else if (jqXHR.status == 500) {
-                msg = 'Internal Server Error [500].';
-            } else if (exception === 'parsererror') {
-                msg = 'Requested JSON parse failed.';
-            } else if (exception === 'timeout') {
-                msg = 'Time out error.';
-            } else if (exception === 'abort') {
-                msg = 'Ajax request aborted.';
-            } else {
-                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-            }
-        });
-        $.ajax({ // //enviar el nombre del archivo al python
-            type: "POST",
-            url: "php/sendname.php",
-            data: fnameJ,
-        }).done(function() {}).fail(function(jqXHR, exception) {
-            var msg = '';
-            if (jqXHR.status === 0) {
-                msg = 'Not connect.\n Verify Network.';
-            } else if (jqXHR.status == 404) {
-                msg = 'Requested page not found. [404]';
-            } else if (jqXHR.status == 500) {
-                msg = 'Internal Server Error [500].';
-            } else if (exception === 'parsererror') {
-                msg = 'Requested JSON parse failed.';
-            } else if (exception === 'timeout') {
-                msg = 'Time out error.';
-            } else if (exception === 'abort') {
-                msg = 'Ajax request aborted.';
-            } else {
-                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-            }
-        });
         if (f) {
+            $.ajax({
+                type: "POST",
+                url: "php/uploadfile.php",
+                cache: false,
+                contentType: false,
+                processData: false,
+                async: false,
+                data: formD,
+            }).done(function(response) {
+                //console.log(response)
+            });
+            $.ajax({ //enviar los datos en php para cargarlos en un archivo .txt
+                type: "POST",
+                url: "php/makefile.php",
+                data: dataP,
+                async: false
+            }).done(function(data, status) {
+                fname = data.split('.')[0]; // recuperar el nombre del archive sin el .txt
+                fnameJ = { "name": fname }; // aqui tiene el .txt
+                console.log(status);
+            }).fail(function(jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+            });
+            $.ajax({ // //enviar el nombre del archivo al python
+                type: "POST",
+                url: "php/sendname.php",
+                data: fnameJ,
+            }).done(function() {}).fail(function(jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+            });
             param = '?param=' + fname // Enviar el nombre del archivo en caso que el cliente no reciba el correo
             window.location.href = "done.html" + param
         }

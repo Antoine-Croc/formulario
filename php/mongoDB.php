@@ -6,10 +6,13 @@
 
         $cursor = $mng->executeQuery('gdc.dictionaries', $query);
 
-        foreach ( $cursor as $array) {
-            echo(json_encode((array) $array));
-           }
-
+        foreach ( $cursor as $doc) {
+            $newObj= (Object)[
+                "tarifsold" => $doc -> tarifsold,
+                "regions" => $doc -> regions
+            ];
+          }
+           echo json_encode($newObj);
     } catch (MongoDB\Driver\Exception\Exception $e) {
             //TODO
         }
