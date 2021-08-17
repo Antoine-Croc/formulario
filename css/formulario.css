@@ -113,3 +113,46 @@ form .form-group label.form-radio-label {
 form .form-control {
     margin-bottom: 12px;
 }
+
+.progress__contour {
+    position: absolute;
+    border: 5px solid #B22222;
+    border-radius: 8px;
+    background-color: bisque;
+    height: 100px;
+    width: 310px;
+    top: 50%;
+    left: 40%;
+}
+
+.progress__contour legend {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+.progress__bar {
+    position: relative;
+    top: 0px;
+    left: 50px;
+    width: 210px;
+    height: 30px;
+    background: #9cbab4;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress__fill {
+    width: 0%;
+    height: 100%;
+    background: #009579;
+    transition: all 0.2s;
+}
+
+.progress__text {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    font: bold 14px "Quicksand", sans-serif;
+    color: #ffffff;
+}

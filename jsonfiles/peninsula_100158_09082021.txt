@@ -1,0 +1,1 @@
+{"arch":"cuarto.csv","cuartoHor":"true","flag":"false","tipoCont":3,"tar":"6.1A","reg":"peninsula","potCont":[0,0,0,0,0,0]}

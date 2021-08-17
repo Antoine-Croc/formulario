@@ -5,7 +5,10 @@
     }
     else {
         move_uploaded_file($_FILES['file']['tmp_name'], '../curvas/' . $_FILES['file']['name']);
-        echo 'ok file';
+        $path = '../curvas/';
+        $filename = $_FILES['file']['name'];
+        $filepath = $path . $filename;
+        echo $filepath;
     }
 
 ?>

@@ -30,6 +30,10 @@ $(document).ready(function() {
         }
     });
 
+    document.getElementById('progress__contour').style.display = "none"; //hiding of progress bar
+    myProgressBar = document.querySelector(".progress__bar");
+    updateProgressBar(myProgressBar, 0);
+
     $('#file').change(function() {
         selectedFile = this.files[0]
         formD.append("file", selectedFile)
@@ -75,7 +79,7 @@ $(document).ready(function() {
                 async: false,
                 data: formD,
             }).done(function(response) {
-                //console.log(response)
+                console.log(response)
             });
             $.ajax({ //enviar los datos en php para cargarlos en un archivo .txt
                 type: "POST",
@@ -126,42 +130,52 @@ $(document).ready(function() {
                     msg = 'Uncaught Error.\n' + jqXHR.responseText;
                 }
             });
-            param = '?param=' + fname // Enviar el nombre del archivo en caso que el cliente no reciba el correo
-            window.location.href = "done.html" + param
         }
     });
 
     $('#button').on('click', function(e) {
         e.preventDefault();
         var f = validateForm();
-        $.ajax({
-            type: "GET",
-            url: 'php/getlink.php',
-            data: null,
-            async: false,
-        }).done(function(response) {
-            dataP["link"] = response;
-        }).fail(function(jqXHR, exception) {
-            var msg = '';
-            if (jqXHR.status === 0) {
-                msg = 'Not connect.\n Verify Network.';
-            } else if (jqXHR.status == 404) {
-                msg = 'Requested page not found. [404]';
-            } else if (jqXHR.status == 500) {
-                msg = 'Internal Server Error [500].';
-            } else if (exception === 'parsererror') {
-                msg = 'Requested JSON parse failed.';
-            } else if (exception === 'timeout') {
-                msg = 'Time out error.';
-            } else if (exception === 'abort') {
-                msg = 'Ajax request aborted.';
-            } else {
-                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-            }
-        });
         if (f) {
-            param = '?param=' + JSON.stringify(dataP)
-            window.location.href = "../form_opt/index.html" + param
+            document.getElementById('progress__contour').style.display = "block";
+            var i = 0
+            var thisInt = setInterval(function() {
+                updateProgressBar(myProgressBar, i)
+                i++
+                if (i == 101) {
+                    clearInterval(thisInt)
+                    param = '?param=' + JSON.stringify(dataP)
+                    window.location.href = "../form_opt/index.html" + param
+                }
+            }, 200)
+            $.ajax({
+                type: "POST",
+                url: "php/uploadfile.php",
+                cache: false,
+                contentType: false,
+                processData: false,
+                async: false,
+                data: formD,
+            }).done(function(response) {
+                dataP["link"] = response;
+            }).fail(function(jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+            });
         }
     })
 });
@@ -205,17 +219,17 @@ function toSave() { //recuperate values to be sent
     val_cuartHorario = (xlCuarto || csvCuarto)
 
     for (let i = 1; i < document.getElementById("potency_input").elements.length + 1; i++) {
-        val_potency.push(parseInt($(`#Value_${i}`).val()));
+        val_potency.push(parseFloat($(`#Value_${i}`).val()));
     }
 
     //return postDataJ(val_archivoJSON, val_Narchivo, val_cuartHorario, val_Ntarifa61, val_contador, val_tarifaantigua, val_region, val_potency)
     return postData(val_Narchivo, val_cuartHorario, val_Ntarifa61, val_contador, val_tarifaantigua, val_region, val_potency)
 }
 
-function postDataJ(AJson, Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) { //preparar la forma json para el archivo
-    dataP = { "JsonArch": AJson, "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
-    return true;
-}
+// function postDataJ(AJson, Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) { //preparar la forma json para el archivo
+//     dataP = { "JsonArch": AJson, "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
+//     return true;
+// }
 
 function postData(Arch, CuartoHor, Flag, TipoCont, Tar, Reg, PotCont) { //preparar la forma json para el archivo
     dataP = { "arch": Arch, "cuartoHor": CuartoHor, "flag": Flag, "tipoCont": TipoCont, "tar": Tar, "reg": Reg, "potCont": PotCont };
@@ -332,4 +346,18 @@ function isNumeric(str) { //verify string is numeric (float or int)
     }
     return !isNaN(str) && // use type coersion to parse the _entirety_ of the string
         !isNaN(parseFloat(str)) //ensure strings of whitespace fail
+}
+//-------------Progress-bar-----------------------
+var myProgressBar = null;
+var fileSize = null;
+//------------------------------------------------
+
+function validateSize(input) {
+    fileSize = input.files[0].size / 1024 / 1024; // in MiB
+}
+
+function updateProgressBar(progressBar, value) {
+    value = Math.round(value);
+    progressBar.querySelector(".progress__fill").style.width = `${value}%`;
+    progressBar.querySelector(".progress__text").textContent = `${value}%`;
 }
