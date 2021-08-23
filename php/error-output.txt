@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 286, in <module>
+    print("Creando archivo de NUEVAS tarifas")
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument

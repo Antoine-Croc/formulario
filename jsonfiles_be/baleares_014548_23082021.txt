@@ -1,0 +1,1 @@
+{"arch":"curva_Anitin1.xlsx","cuartoHor":"true","flag":"false","tipoCont":5,"tar":"6.1A","reg":"baleares","potCont":[10,10,10,10,10,10]}

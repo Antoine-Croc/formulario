@@ -80,16 +80,6 @@ $(document).ready(function() {
                 data: formD,
             }).done(function(response) {
                 console.log(response)
-            });
-            $.ajax({ //enviar los datos en php para cargarlos en un archivo .txt
-                type: "POST",
-                url: "php/makefile.php",
-                data: dataP,
-                async: false
-            }).done(function(data, status) {
-                fname = data.split('.')[0]; // recuperar el nombre del archive sin el .txt
-                fnameJ = { "name": fname }; // aqui tiene el .txt
-                console.log(status);
             }).fail(function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
@@ -108,13 +98,11 @@ $(document).ready(function() {
                     msg = 'Uncaught Error.\n' + jqXHR.responseText;
                 }
             });
-            $.ajax({ // //enviar el nombre del archivo al python
+            $.ajax({ //enviar la potencia y nombre del archivo al python
                 type: "POST",
-                url: "php/sendname.php",
-                data: fnameJ,
-            }).done(function(res) {
-                console.log(res)
-            }).fail(function(jqXHR, exception) {
+                url: "php/sendlista.php",
+                data: { "list": dataP["potCont"].toLocaleString(), "name": dataP["arch"].split('.')[0], "tipoCont": dataP["tipoCont"], "tar": dataP["tar"], "reg": dataP["reg"], 'cuartoHor': dataP["cuartoHor"].toLocaleString(), "flag": dataP["flag"].toLocaleString() }
+            }).done(function(response) {}).fail(function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
                     msg = 'Not connect.\n Verify Network.';
@@ -132,6 +120,8 @@ $(document).ready(function() {
                     msg = 'Uncaught Error.\n' + jqXHR.responseText;
                 }
             });
+            param = '?param=' + fname // Enviar el nombre del archivo en caso que el cliente no reciba el correo
+            window.location.href = "done.html" + param
         }
     });
 
