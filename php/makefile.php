@@ -21,7 +21,7 @@ $when = date("his_dmY");
 
 $name = ($Jdata["reg"].'_'.$when.'.txt');
 
-file_put_contents('../jsonfiles/'.$name, json_encode($Jdata)); //crear el archivo y cargar los datos adentro 
+file_put_contents('../jsonfiles_be/'.$name, json_encode($Jdata)); //crear el archivo y cargar los datos adentro 
 
 echo $name;
 ?>

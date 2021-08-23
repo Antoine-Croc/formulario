@@ -84,7 +84,7 @@ function formatCSV_JSON(txt) { //Big function that does what it's called
         }
     }
     jsonStrtot = jsonStrtot + "]";
-    console.log(jsonStrtot)
+    //console.log(jsonStrtot)
     document.getElementById("csvtext_use").innerHTML = jsonStrtot;
     return true;
 }

@@ -168,7 +168,7 @@ def df_potConsumida_NEWTAR(archivo, tarifa, region):
     list_PotConsum = []  # Lugar de volcado de los consumos del archivo de curva de consummo de entrada
 
     try:  # Intento abrir un archivo de formato ".csv"
-        data = pd.read_csv(f'{ph.path_actualizacionNT_clientes}{archivo}.csv', sep=';')
+        data = pd.read_csv(f'C:/xampp/htdocs/ingebau/formulario/curvas/{archivo}.csv', sep=';')
         for i in range(len(data)):
             dateCSV = f'{str(data["Fecha"][i])} {str(data["Hora"][i])}'
             try:
@@ -181,7 +181,7 @@ def df_potConsumida_NEWTAR(archivo, tarifa, region):
                 potConsum = data["Consumption"][i].replace('.', '')
             list_PotConsum.append(potConsum.replace(',', '.'))
     except:  # Si no funciona, intento abrir un archivo de formato ".xlsx"
-        data = pd.read_excel(f'{ph.path_actualizacionNT_clientes}{archivo}.xlsx', sheet_name='Hoja1')
+        data = pd.read_excel(f'C:/xampp/htdocs/ingebau/formulario/curvas/{archivo}.xlsx', sheet_name='Hoja1')
         for i in range(len(data)):
             dateXLSX = dt.strptime(f'{str(data["Fecha"][i])}', '%Y-%m-%d %H:%M:%S')
             dateXLSX = dateXLSX.replace(hour=data["Hora"][i])
@@ -1323,7 +1323,7 @@ def optimizacionPotencias(archivo, tarifa, region, pot, tipoContador, cuartaHora
     # REDONDEO A LA UNIDAD DE LOS VALORES DE POTENCIA OPTIMIZADOS
     potOpt = [0, 0, 0, 0, 0, 0]
     for i in range(0, 6):
-        potOpt[i] = round(sol.x[i], 2)
+        potOpt[i] = round(sol.x[i], 1)
     return potOpt
 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#

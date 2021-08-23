@@ -1,1 +1,0 @@
-{"arch":"cuarto.csv","cuartoHor":"true","flag":"false","tipoCont":1,"tar":"6.1A","reg":"canarias","potCont":[0,0,0,0,0,0]}

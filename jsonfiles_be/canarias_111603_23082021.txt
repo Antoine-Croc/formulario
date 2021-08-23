@@ -1,0 +1,1 @@
+{"arch":"curva_test_csv.csv","cuartoHor":"true","flag":"false","tipoCont":5,"tar":"6.1A","reg":"canarias","potCont":[10,10,10,10,10,10]}
