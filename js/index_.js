@@ -332,9 +332,11 @@ function validateForm() { //verify all elements are conform to the required form
     }
     //test on the potency values
     for (let i = 1; i < document.getElementById("potency_input").elements.length + 1; i++) {
-        let val = document.forms["formulario"][`Value_${i}`].value; //grab value enterd by client
+        let val = parseFloat(document.forms["formulario"][`Value_${i}`].value); //grab value enterd by client
+        let valb = null;
         if (i > 1) {
-            if (document.forms["formulario"][`Value_${i}`].value < document.forms["formulario"][`Value_${i-1}`].value) {
+            valb = parseFloat(document.forms["formulario"][`Value_${i-1}`].value);
+            if (val < valb) {
                 alert("Los valores de Px deben de ser superior o iguales a Px-1");
                 return false;
             }

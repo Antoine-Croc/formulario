@@ -1,6 +1,7 @@
 # ======================== IMPORTS ========================
 import sys
 import os
+import time
 
 if os.path.exists('O:/'):
     sys.path.insert(0, 'O:/INGEBAU/Becarios/Data_Utils')
@@ -252,11 +253,12 @@ ant_tar3pot = False  # Dejar true si la tarifa antigua es distinta de 6.1 A
 tipoCont = 2  # Contador de medida del cliente
 antigua_tarifa = '6.1A'  # Tarifa antigua del cliente
 region = 'canarias'  # Region de tarificación del cliente
-potCont = [280, 280, 280, 280, 280, 280]  # Potencia contratada por el cliente en M
+potCont = [10, 50, 100, 150, 200, 250]  # Potencia contratada por el cliente en M
 
 
 if __name__ == '__main__':
-
+    start = time.time()
+    
     if len(sys.argv)>1:
         curva = sys.argv[1]
         ch = sys.argv[2]
@@ -271,7 +273,7 @@ if __name__ == '__main__':
 
     # Creamos el archivo de EXCEL donde vamos a trabajar
     writer = pd.ExcelWriter(
-        f'C:\\xampp\\htdocs\\ingebau\\form_opt\\results\\resultadoScript_{curva}.xlsx',
+        f'C:\\xampp\\htdocs\\ingebau\\formulario\\excel\\resultadoScript_{curva}.xlsx',
         engine='xlsxwriter')
 
     # Realizamos la ejecución en paralelos de antiguas y nuevas tarifas
@@ -291,3 +293,5 @@ if __name__ == '__main__':
 
         in1_opt, in2_opt = results_newTar.result()
         print('La combinacion de potencias optimas es: ', s3_optimizeNT(in1_opt, in2_opt))
+    end = time.time()
+    print(end - start)

@@ -1,6 +1,6 @@
    <?PHP //database call to recuperate available regions/tariffs
     try {
-        $mng = new MongoDB\Driver\Manager("mongodb://ingebau:ingebau@ec2-35-180-109-56.eu-west-3.compute.amazonaws.com:27017/gdc");        
+        $mng = new MongoDB\Driver\Manager("mongodb://ingebau:ingebau@ec2-35-180-208-115.eu-west-3.compute.amazonaws.com:27017/gdc");        
 
         $query = new MongoDB\Driver\Query([]);
 

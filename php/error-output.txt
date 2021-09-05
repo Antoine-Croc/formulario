@@ -4,3 +4,82 @@ Traceback (most recent call last):
 BrokenPipeError: [Errno 32] Broken pipe
 Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
 OSError: [Errno 22] Invalid argument
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 286, in <module>
+    print("Creando archivo de NUEVAS tarifas")
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 286, in <module>
+    print("Creando archivo de NUEVAS tarifas")
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 286, in <module>
+    print("Creando archivo de NUEVAS tarifas")
+BrokenPipeError: [Errno 32] Broken pipe
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>
+OSError: [Errno 22] Invalid argument
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 294, in <module>
+    in1_opt, in2_opt = results_newTar.result()
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\_base.py", line 438, in result
+    return self.__get_result()
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\_base.py", line 390, in __get_result
+    raise self._exception
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 76, in s2_newTar
+    consumos_Energias_NEWTAR, _, consumos_Energias_NEWTAR_excel = energias_NT_proyectoWEB_test.df_enerConsumida_NEWTAR(curva,
+  File "C:\xampp\htdocs\ingebau\formulario\python\energias_NT_proyectoWEB_test.py", line 133, in df_enerConsumida_NEWTAR
+    newTar = tablesLOAD['CambioTarifa'][tarifa]
+KeyError: '3.0'
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\energias_NT_proyectoWEB_test.py", line 150, in df_enerConsumida_NEWTAR
+    data = pd.read_csv(f'C:/xampp/htdocs/ingebau/formulario/curvas/{archivo}.csv', sep=';') #------------- CAMBIO PARA EL TEST CON EL FRONTEND
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\parsers\readers.py", line 586, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\parsers\readers.py", line 482, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\parsers\readers.py", line 811, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\parsers\readers.py", line 1040, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 51, in __init__
+    self._open_handles(src, kwds)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\parsers\base_parser.py", line 222, in _open_handles
+    self.handles = get_handle(
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\common.py", line 701, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/xampp/htdocs/ingebau/formulario/curvas/curva_Anitin1.csv'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 294, in <module>
+    in1_opt, in2_opt = results_newTar.result()
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\_base.py", line 438, in result
+    return self.__get_result()
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\_base.py", line 390, in __get_result
+    raise self._exception
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\xampp\htdocs\ingebau\formulario\python\test2_optimizeParalelo_test.py", line 76, in s2_newTar
+    consumos_Energias_NEWTAR, _, consumos_Energias_NEWTAR_excel = energias_NT_proyectoWEB_test.df_enerConsumida_NEWTAR(curva,
+  File "C:\xampp\htdocs\ingebau\formulario\python\energias_NT_proyectoWEB_test.py", line 163, in df_enerConsumida_NEWTAR
+    data = pd.read_excel(f'C:/xampp/htdocs/ingebau/formulario/curvas/{archivo}.xlsx', sheet_name='Hoja1') #------------- CAMBIO PARA EL TEST CON EL FRONTEND
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\excel\_base.py", line 364, in read_excel
+    io = ExcelFile(io, storage_options=storage_options, engine=engine)
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\excel\_base.py", line 1191, in __init__
+    ext = inspect_excel_format(
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\excel\_base.py", line 1070, in inspect_excel_format
+    with get_handle(
+  File "C:\Users\darka\AppData\Local\Programs\Python\Python39\lib\site-packages\pandas\io\common.py", line 710, in get_handle
+    handle = open(handle, ioargs.mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/xampp/htdocs/ingebau/formulario/curvas/curva_Anitin1.xlsx'

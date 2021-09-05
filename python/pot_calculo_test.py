@@ -71,7 +71,7 @@ ant_tar3pot = False  # Dejar true si la tarifa antigua es distinta de 6.1 A
 tipoCont = 2  # Contador de medida del cliente
 antigua_tarifa = '6.1A'  # Tarifa antigua del cliente
 region = 'canarias'  # Region de tarificación del cliente
-potCont = [280, 280, 280, 280, 280, 280]  # Potencia contratada por el cliente en M
+potCont = [10, 50, 100, 150, 200, 280]  # Potencia contratada por el cliente en M
 
 if __name__ == '__main__':
 

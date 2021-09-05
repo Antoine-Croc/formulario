@@ -101,8 +101,11 @@ $(document).ready(function() {
             $.ajax({ //enviar la potencia y nombre del archivo al python
                 type: "POST",
                 url: "php/sendlista.php",
+                async: true,
                 data: { "list": dataP["potCont"].toLocaleString(), "name": dataP["arch"].split('.')[0], "tipoCont": dataP["tipoCont"], "tar": dataP["tar"], "reg": dataP["reg"], 'cuartoHor': dataP["cuartoHor"].toLocaleString(), "flag": dataP["flag"].toLocaleString() }
-            }).done(function(response) {}).fail(function(jqXHR, exception) {
+            }).done(function(response) {
+                console.log(response)
+            }).fail(function(jqXHR, exception) {
                 var msg = '';
                 if (jqXHR.status === 0) {
                     msg = 'Not connect.\n Verify Network.';
@@ -212,7 +215,7 @@ var csvTested = false;
 var regionL = [];
 var contadorL = ["1", "2", "3", "4", "5"];
 var tarifaL = []
-var fname = '';
+var fname = 'this_is_filename';
 var filename = '';
 //-------------------------------
 
@@ -236,7 +239,6 @@ function toSave() { //recuperate values to be sent
     var val_Narchivo = fileName.split('\\')[2];
 
     val_Ntarifa61 = (val_tarifaantigua != "6.1A");
-
     val_cuartHorario = (xlCuarto || csvCuarto)
 
     for (let i = 1; i < document.getElementById("potency_input").elements.length + 1; i++) {
@@ -308,13 +310,11 @@ function validateForm() { //verify all elements are conform to the required form
         alert("Seleccionar una region");
         return false;
     }
-
     //test on the counter type
     if (document.getElementById("counter-type").value == "null") {
         alert('Elije un tipo de contador');
         return false;
     }
-
     //test on the old rate
     if (document.getElementById('rate-type').value == "null") {
         alert('Elije un tarifua antiguo');
@@ -322,9 +322,11 @@ function validateForm() { //verify all elements are conform to the required form
     }
     //test on the potency values
     for (let i = 1; i < document.getElementById("potency_input").elements.length + 1; i++) {
-        let val = document.forms["formulario"][`Value_${i}`].value; //grab value enterd by client
+        let val = parseFloat(document.forms["formulario"][`Value_${i}`].value); //grab value enterd by client
+        let valb = null;
         if (i > 1) {
-            if (document.forms["formulario"][`Value_${i}`].value < document.forms["formulario"][`Value_${i-1}`].value) {
+            valb = parseFloat(document.forms["formulario"][`Value_${i-1}`].value);
+            if (val < valb) {
                 alert("Los valores de Px deben de ser superior o iguales a Px-1");
                 return false;
             }
@@ -349,14 +351,12 @@ function validateForm() { //verify all elements are conform to the required form
         alert("Elije un tipo de archivo (csv/xlsx)")
         return false;
     }
-
     if (!contentGood) {
         alertmsg = "La columna de Consumo tiene [wrong values] en la(s) linea(s) siguiente:"
         contentRow.forEach(e => alertmsg = alertmsg + " - " + e)
         alert(alertmsg);
         return false;
     }
-
     return toSave();
 }
 
